@@ -1,0 +1,32 @@
+@(participantForm: Form[models.Participant], lecture: Lecture)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Zapisuje się") {
+
+    @if(participantForm.hasErrors) {
+        <ul>
+        @participantForm.errors.map { error =>
+            <li>@error.message
+        }
+        </ul>
+    }
+	
+	@form(action = routes.LectureController.saveEnroll(lecture.id)) {
+		<fieldset>
+			<legend>@lecture.name</legend>
+			
+			<input type="hidden" name="lectureId" value="@lecture.id">		
+		
+			@inputText(participantForm("name"))
+			
+			@inputText(participantForm("email"))
+			
+		</fieldset>
+		
+		<div class="actions">
+			<input type="submit" class="btn btn-primary" value="Zapisuję się">
+		</div>
+	}
+}

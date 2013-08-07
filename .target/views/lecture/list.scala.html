@@ -1,0 +1,34 @@
+@(lectures: List[models.Lecture])(implicit flash: Flash)
+
+@main("Wykłady") {
+
+    @flash.get("message") match {
+        case Some(message) => {
+          @tags.message {
+              @Messages(message)
+          }
+        }
+        case None => {}
+    }
+
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<td>@Messages("title")</td>
+                <td>@Messages("date")</td>
+				<td>@Messages("actions")</td>
+			</tr>
+		</thead>
+	@lectures.map { lecture =>
+		<tr>
+			<td>@lecture.name</td>
+			<td>@lecture.start.toString("dd. MMMM yyyy")</td>
+			<td>
+				<div class="btn-group">
+					<a href="@routes.LectureController.startEnroll(lecture.id)" class="btn btn-mini">@Messages("enroll")</a>
+				</div>
+			</td>
+		</tr>
+	}
+	</table>
+}

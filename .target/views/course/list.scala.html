@@ -1,0 +1,24 @@
+@(lectures: List[models.Lecture])
+
+@main("Wykłady") {
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<td>@Messages("title")</td>
+                <td>@Messages("date")</td>
+				<td>@Messages("actions")</td>
+			</tr>
+		</thead>
+	@lectures.map { lecture =>
+		<tr>
+			<td>@lecture.name</td>
+			<td>@lecture.start.toString("dd. MMMM yyyy")</td>
+			<td>
+				<div class="btn-group">
+					<button class="btn btn-mini">@Messages("enroll")</button>
+				</div>
+			</td>
+		</tr>
+	}
+	</table>
+}

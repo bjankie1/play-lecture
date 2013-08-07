@@ -1,0 +1,13 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index
+
+GET		/lecture					controllers.LectureController.index
+GET		/lecture/enroll/:id			controllers.LectureController.startEnroll(id: Int)
+POST	/lecture/enroll/:id			controllers.LectureController.saveEnroll(id: Int)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
